@@ -4,8 +4,10 @@ progress.pl - Simple progressbar
 Usage:
 ------
 
+```shell
 progress.pl _pid_
 progress.pl _command_ _and_ _arguments_
+```
 
 Description:
 ------------
