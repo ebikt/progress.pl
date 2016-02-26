@@ -4,9 +4,9 @@ progress.pl - Simple progressbar
 Usage:
 ------
 
-`progress.pl _pid_`
+progress.pl _pid_
 
-`progress.pl _command_ _and_ _arguments_`
+progress.pl _command_ _and_ _arguments_
 
 Description:
 ------------
