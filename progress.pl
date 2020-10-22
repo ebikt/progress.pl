@@ -14,15 +14,16 @@ if (not $#ARGV and $ARGV[0] =~ /^\d+/) {
   $running = sub { kill(0, $child) > 0 };
   $exit = sub { exit 0; };
 
-  open DATA, '<', '/proc/uptime' or die;
+  open DATA, '<', '/proc/self/stat' or die;
   my @s = split(' ', <DATA>);
   close DATA;
-  my $system_start = $start - $s[0];
-  open DATA, '<', "/proc/$child/stat";
-  my @s = split(' ', <DATA>);
-  close DATA;
+  my $hznow = 0+$s[21];
   my $hertz = POSIX::sysconf(POSIX::_SC_CLK_TCK());
-  $start = $system_start + $s[21]/$hertz;
+
+  open DATA, '<', "/proc/$child/stat";
+  @s = split(' ', <DATA>);
+  close DATA;
+  $start -= ($hznow - $s[21])*1.0/$hertz;
 } else {
   $child = fork();
   if (defined($child) and not $child) {
